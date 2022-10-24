@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,7 +54,8 @@ public class Product {
     private Set<PriceReduction> priceReductions = new HashSet();
 
 //  Creation date --->>SE DEBE GUARDAR UNA FECHA DE CREACIÓN AL CONSTRUIR LA ENTIDAD Product
-    private ZonedDateTime creationDate;
+    @CreatedDate
+    private LocalDateTime creationDate;
 
 //  Creator (User) -->Enlaza con Tabla Usuarios y obtiene el usuario que lo ha creado.
     private User creator;
