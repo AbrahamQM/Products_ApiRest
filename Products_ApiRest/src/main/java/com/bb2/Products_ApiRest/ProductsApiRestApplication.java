@@ -7,10 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProductsApiRestApplication {
 
 	public static void main(String[] args) {
-		System.out.println("Iniciando aplicacion.");
+		System.out.println("Iniciando aplicación.");
+
 		SpringApplication.run(ProductsApiRestApplication.class, args);
-
-
 	}
 
 }

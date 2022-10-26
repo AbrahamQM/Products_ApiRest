@@ -60,6 +60,8 @@ public class Product {
     private LocalDateTime creationDate;
 
 //  Creator (User) -->Enlaza con Tabla Usuarios y obtiene el usuario que lo ha creado.
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "creator", referencedColumnName = "user_id")
     private User creator;
 
 

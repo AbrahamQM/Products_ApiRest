@@ -14,6 +14,6 @@ public interface SupplierMapper {
     SupplierDTO ModelToDTO(Supplier supplier);
 
     //Listados
-    List<Supplier> getListEntities(List<SupplierDTO> supplierDtoList);
+    List<Supplier> getListModels(List<SupplierDTO> supplierDtoList);
     List<SupplierDTO> getListDtos(List<Supplier> supplierList);
 }
