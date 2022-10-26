@@ -4,10 +4,12 @@ import com.bb2.Products_ApiRest.Repositories.UserRepository;
 import com.bb2.Products_ApiRest.Services.Interfaces.UserServices;
 import com.bb2.Products_ApiRest.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserServiceImpl implements UserServices {
 
     @Autowired

@@ -1,7 +1,6 @@
 package com.bb2.Products_ApiRest.Controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +11,8 @@ public class HelloController {
     @GetMapping("/")
     public String saludo(){
         System.out.println("Saludando desde HelloController");
-        return "Hola desde HelloController";
+//        return "Hola desde HelloController";
+        return "Hola desde Hellocontroller!!";
     }
 
     @GetMapping("/authUserPrueba")

@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeHttpRequests()
                 .antMatchers("/hello/").permitAll() //Para probar con endpoint hello/
-                .antMatchers("/sign-in").permitAll() //Para poder registrar un usuario
+                .antMatchers("/users/").permitAll() //Para poder registrar un usuario
                 .antMatchers("/hello/authUserPrueba").hasRole(String.valueOf(RoleEnum.USER))
                 .antMatchers("/hello/authAdminPrueba").hasRole(String.valueOf(RoleEnum.ADMIN))
                 .anyRequest().authenticated()
