@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+//@Getter
+//@Setter
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@EnableJpaAuditing
+//@ApiModel("Products: Entidad para representar un elemento producto con sus atributos") -->Para swagger
 @Entity
 @Table(name = "Products", uniqueConstraints = @UniqueConstraint(columnNames = "item_code"))
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EnableJpaAuditing
-//@ApiModel("Products: Entidad para representar un elemento producto con sus atributos") -->Para swagger
 public class Product {
 
     //----------Atributos
@@ -64,6 +64,108 @@ public class Product {
     @JoinColumn(name = "creator", referencedColumnName = "user_id")
     private User creator;
 
+    //Constructores
+    public Product() {
+    }
+
+    public Product(Long idProduct, Long itemCode, String description, Double price, StateEnum state,
+                   String reasonDeactivation, Set<Supplier> suppliers, Set<PriceReduction> priceReductions,
+                   LocalDateTime creationDate, User creator) {
+        this.idProduct = idProduct;
+        this.itemCode = itemCode;
+        this.description = description;
+        this.price = price;
+        this.state = state;
+        this.reasonDeactivation = reasonDeactivation;
+        this.suppliers = suppliers;
+        this.priceReductions = priceReductions;
+        this.creationDate = creationDate;
+        this.creator = creator;
+    }
+
+
+    //Getter y setter
+
+
+    public Long getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    public Long getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(Long itemCode) {
+        this.itemCode = itemCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public StateEnum getState() {
+        return state;
+    }
+
+    public void setState(StateEnum state) {
+        this.state = state;
+    }
+
+    public String getReasonDeactivation() {
+        return reasonDeactivation;
+    }
+
+    public void setReasonDeactivation(String reasonDeactivation) {
+        this.reasonDeactivation = reasonDeactivation;
+    }
+
+    public Set<Supplier> getSuppliers() {
+        return suppliers;
+    }
+
+    public void setSuppliers(Set<Supplier> suppliers) {
+        this.suppliers = suppliers;
+    }
+
+    public Set<PriceReduction> getPriceReductions() {
+        return priceReductions;
+    }
+
+    public void setPriceReductions(Set<PriceReduction> priceReductions) {
+        this.priceReductions = priceReductions;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
 
     //----------Métodos
     public void addSupplier(Supplier supplier) {

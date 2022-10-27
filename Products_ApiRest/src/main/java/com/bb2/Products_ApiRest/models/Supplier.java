@@ -7,13 +7,12 @@ import lombok.Setter;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
-
+//@Getter
+//@Setter
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Table(name = "suppliers")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Supplier {
 
         @Id
@@ -23,6 +22,15 @@ public class Supplier {
 
         private String name;
         private String country;
+
+        public Supplier() {
+        }
+
+        public Supplier(Long idSupplier, String name, String country) {
+                this.idSupplier = idSupplier;
+                this.name = name;
+                this.country = country;
+        }
 
         public String getName() {
                 return name;
