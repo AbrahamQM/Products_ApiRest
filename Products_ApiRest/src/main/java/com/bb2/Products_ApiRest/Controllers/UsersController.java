@@ -1,5 +1,7 @@
 package com.bb2.Products_ApiRest.Controllers;
 
+import com.bb2.Products_ApiRest.DTOs.UserDTO;
+import com.bb2.Products_ApiRest.Repositories.UserRepository;
 import com.bb2.Products_ApiRest.Services.Implementations.UserServiceImpl;
 import com.bb2.Products_ApiRest.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +14,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000" )
 @RestController
-//@Controller //-------------------------todo convertir mvc en RestContoller con react
 @RequestMapping("/users")
 public class UsersController {
 
     @Autowired
     private UserServiceImpl userServiceImpl;
+//    @Autowired //OJO ES TEMPORAL PARA PRUEBAS!!!
+//    private UserRepository userRepository;
 
+//    @GetMapping("/allUsers/") //OJO ES TEMPORAL PARA PRUEBAS!!!
+//    public List<User> getAllUsers() {
+//        return userRepository.findAll();
+//    }
     @GetMapping("/allUsers/")
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userServiceImpl.getAllUsers();
     }
 

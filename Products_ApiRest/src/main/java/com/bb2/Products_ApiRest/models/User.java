@@ -26,7 +26,10 @@ public class User {
     private String userName;
     @NotEmpty
     private String password;
-    @NotEmpty
+
+//    @NotEmpty
+    @Column(columnDefinition = "VARCHAR(6)", nullable = false)
+    @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
     public User() {
