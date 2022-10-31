@@ -12,7 +12,6 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    //assemblers  TODO ¿Crear la implementacion?
     User dtoToModel(UserDTO userDTO);
     UserDTO modelToDto(User user);
 

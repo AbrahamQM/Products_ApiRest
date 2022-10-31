@@ -8,11 +8,13 @@ import com.bb2.Products_ApiRest.Services.Interfaces.ProductService;
 import com.bb2.Products_ApiRest.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+
+@Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired

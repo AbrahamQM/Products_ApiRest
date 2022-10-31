@@ -1,6 +1,7 @@
 package com.bb2.Products_ApiRest.Services.Implementations;
 
 import com.bb2.Products_ApiRest.DTOs.UserDTO;
+import com.bb2.Products_ApiRest.Exception.ResourceNotFoundException;
 import com.bb2.Products_ApiRest.Mappers.UserMapper;
 import com.bb2.Products_ApiRest.Repositories.UserRepository;
 import com.bb2.Products_ApiRest.Services.Interfaces.UserServices;
@@ -8,7 +9,6 @@ import com.bb2.Products_ApiRest.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,24 +40,28 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public UserDTO getById(Long id) { //TODO hacer que devuelva UserDTO en lugar de user
+    public UserDTO getById(Long id) {
         Optional<User> userOpt = userRepository.findById(id);
-        User user = null;
+
         if (userOpt.isPresent()) {
-            user = userOpt.get();
-        }else{
-            throw new RuntimeException("User not found for id " + id);
+            return userMapper.modelToDto(userOpt.get());
         }
-        return null; //TODO***************************************************OJO
+        throw new ResourceNotFoundException("User not found for id " + id);
     }
 
     @Override
-    public void deleteViaId(long id) { //TODO******** mal implementado, volver a implementar con comprobaciones mejores
-        if (userRepository.findById(id) != null) {
-            Optional user = userRepository.findById(id);
-            //BORRAR si corresponde el usuario
-        }else{
-            throw new RuntimeException("User not found for id " + id);
+    public UserDTO createUser(UserDTO userDTO) {
+        return userMapper.modelToDto(userRepository.save(userMapper.dtoToModel(userDTO)));
+    }
+
+
+    @Override
+    public UserDTO deleteById(long id) {
+        Optional<User> userOpt = userRepository.findById(id);
+        if (userOpt.isPresent()) {
+            userRepository.deleteById(id);
+            return userMapper.modelToDto(userOpt.get());
         }
+        throw new ResourceNotFoundException("User not found for id " + id);
     }
 }

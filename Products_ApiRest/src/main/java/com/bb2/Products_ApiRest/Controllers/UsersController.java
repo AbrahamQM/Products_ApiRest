@@ -5,6 +5,7 @@ import com.bb2.Products_ApiRest.Repositories.UserRepository;
 import com.bb2.Products_ApiRest.Services.Implementations.UserServiceImpl;
 import com.bb2.Products_ApiRest.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,54 +22,43 @@ public class UsersController {
 
     @Autowired
     private UserServiceImpl userServiceImpl;
-//    @Autowired //OJO ES TEMPORAL PARA PRUEBAS!!!
-//    private UserRepository userRepository;
 
-//    @GetMapping("/allUsers/") //OJO ES TEMPORAL PARA PRUEBAS!!!
-//    public List<User> getAllUsers() {
-//        return userRepository.findAll();
-//    }
-    @GetMapping("/allUsers/")
+    //Get All
+    @GetMapping("/allUsers")
     public List<UserDTO> getAllUsers() {
         return userServiceImpl.getAllUsers();
     }
 
+    //Create User
+    @PostMapping("/createUser")
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
+        if(userDTO.getIdUser() != null){ //Si el usuario ya tiene id no es una creación
+            return ResponseEntity.badRequest().build();
+        }
+        //compruebo que el nombre no existe ya en la lista de usuarios almacenados
+        List<UserDTO> users = userServiceImpl.getAllUsers();
+        for(UserDTO dto : users){
+            if(dto.getUserName().equalsIgnoreCase(userDTO.getUserName())){
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        //Everything parece ok, creo el usuario y lo devuelvo en la response
+        return ResponseEntity.ok(userServiceImpl.createUser(userDTO));
+    }
 
+    //Get one by id
+    @GetMapping("/user/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id){
+        UserDTO dto = userServiceImpl.getById(id);
+        if (dto != null){
+            return ResponseEntity.ok(dto);
+        }
+        return ResponseEntity.notFound().build();
+    }
 
-//    @GetMapping("/")
-//    public String viewHomePage(Model model) {
-////        model.addAttribute("alluserslist", userServiceImpl.getAllUsers());
-//        return "Hola desde UsersController.viewHomePage";
-//    }
-//
-//    //Añadir usuario  todo generar newuser
-//    @GetMapping("/adduser")
-//    public String addNewUser(Model model){
-//        User user = new User();
-//        model.addAttribute("user", user);
-//        return "newuser";
-//    }
-//
-//    //Guardar usuario
-//    @PostMapping("/save")
-//    public String saveUser(@ModelAttribute("user") User user) {
-//        userServiceImpl.save(user);
-//        return "redirect:/";
-//    }
-//
-//    //todo generar update
-//    @GetMapping("/showFormForUpdate/{id}")
-//    public String updateForm(@PathVariable(value = "id") long id, Model model) {
-//        User user = userServiceImpl.getById(id);
-//        model.addAttribute("user", user);
-//        return "update";
-//    }
-//
-//    //todo generar deleteViaId(id)
-//    @GetMapping("/deleteEmployee/{id}")
-//    public String deleteThroughId(@PathVariable(value = "id") long id) {
-//        userServiceImpl.deleteViaId(id);
-//        return "redirect:/";
-//    }
-
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<UserDTO> deleteUserById(@PathVariable Long id){
+        UserDTO dto = userServiceImpl.deleteById(id);
+        return ResponseEntity.ok(dto);
+    }
 }
