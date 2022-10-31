@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserServices {
 
     @Override
     public void save(UserDTO userDTO) {
+        //todo hacer comprobaciones de que los datos not null estan en el userDTO
         userRepository.save(userMapper.dtoToModel(userDTO));
     }
 
