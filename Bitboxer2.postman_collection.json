@@ -120,96 +120,134 @@
 			"name": "API Rest",
 			"item": [
 				{
-					"name": "Obtener todos los usuarios",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/allUsers/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"allUsers",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Añadir usuario",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"Usuario AÑADIDO 1\",\r\n    \"password\": \"0000\",\r\n    \"role\": \"USER\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Users",
+					"item": [
+						{
+							"name": "Obtener todos los usuarios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/users/allUsers/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"allUsers",
+										""
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:8080/users/createUser",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"createUser"
-							]
+						{
+							"name": "Añadir usuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\": \"Usuario AÑADIDO 1\",\r\n    \"password\": \"0000\",\r\n    \"role\": \"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/createUser",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"createUser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Usuario por id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/users/user/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Borrar ususario",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/users/user/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Obtener Usuario por id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/user/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"user",
-								"1"
-							]
+					"name": "Products",
+					"item": [
+						{
+							"name": "Obtener todos los productos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/products/allProducts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products",
+										"allProducts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Añadir Producto",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Borrar ususario",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/user/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"user",
-								"1"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			]
 		}
