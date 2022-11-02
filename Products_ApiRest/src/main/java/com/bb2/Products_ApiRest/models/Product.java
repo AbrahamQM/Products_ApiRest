@@ -10,7 +10,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 //@Getter
@@ -45,15 +47,14 @@ public class Product {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "suppliers_products", joinColumns = @JoinColumn(name = "id_product", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "id_supplier", nullable = false))
-    private Set<Supplier> suppliers = new HashSet();
+    private List<Supplier> suppliers = new ArrayList<>();
 
 //  Price reductions. An item can have several price reductions associated to it. No control for overlapping dates is
 //  required but recommended (look at the section ‘Extra points’).
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "price_reductions_products", joinColumns = @JoinColumn(name = "id_product", nullable = false),
         inverseJoinColumns = @JoinColumn(name = "id_price_reduction", nullable = false))
-    private Set<PriceReduction> priceReductions = new HashSet();
-
+    private List<PriceReduction> priceReductions = new ArrayList<>();
 
 //  Creation date --->>SE DEBE GUARDAR UNA FECHA DE CREACIÓN AL CONSTRUIR LA ENTIDAD Product
     @CreatedDate
@@ -69,7 +70,7 @@ public class Product {
     }
 
     public Product(Long idProduct, Long itemCode, String description, Double price, StateEnum state,
-                   String reasonDeactivation, Set<Supplier> suppliers, Set<PriceReduction> priceReductions,
+                   String reasonDeactivation, List<Supplier> suppliers, List<PriceReduction> priceReductions,
                    LocalDateTime creationDate, User creator) {
         this.idProduct = idProduct;
         this.itemCode = itemCode;
@@ -135,19 +136,19 @@ public class Product {
         this.reasonDeactivation = reasonDeactivation;
     }
 
-    public Set<Supplier> getSuppliers() {
+    public List<Supplier> getSuppliers() {
         return suppliers;
     }
 
-    public void setSuppliers(Set<Supplier> suppliers) {
+    public void setSuppliers(List<Supplier> suppliers) {
         this.suppliers = suppliers;
     }
 
-    public Set<PriceReduction> getPriceReductions() {
+    public List<PriceReduction> getPriceReductions() {
         return priceReductions;
     }
 
-    public void setPriceReductions(Set<PriceReduction> priceReductions) {
+    public void setPriceReductions(List<PriceReduction> priceReductions) {
         this.priceReductions = priceReductions;
     }
 

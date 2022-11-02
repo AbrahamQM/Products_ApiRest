@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class Supplier {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supplier_id_seq")
+        @SequenceGenerator(name = "supplier_id_seq", sequenceName = "supplier_id_seq", allocationSize = 1, schema = "erp")
         @Column(name = "supplier_id")
         private Long idSupplier;
 
@@ -30,6 +31,14 @@ public class Supplier {
                 this.idSupplier = idSupplier;
                 this.name = name;
                 this.country = country;
+        }
+
+        public Long getIdSupplier() {
+                return idSupplier;
+        }
+
+        public void setIdSupplier(Long idSupplier) {
+                this.idSupplier = idSupplier;
         }
 
         public String getName() {

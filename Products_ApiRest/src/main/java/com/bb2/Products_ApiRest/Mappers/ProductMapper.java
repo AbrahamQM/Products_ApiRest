@@ -15,7 +15,7 @@ public interface ProductMapper {
     Product dtoToModel(ProductDTO productDTO);
 
     @Mapping(target = "creationDate", source = "product.creationDate", dateFormat ="dd-MM-yyyy HH:mm:ss")
-    ProductDTO ModelToDTO(Product product);
+    ProductDTO modelToDto(Product product);
 
     //Listados
     List<ProductDTO> getListDTO(List<Product> productList);

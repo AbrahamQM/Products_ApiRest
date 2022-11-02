@@ -11,7 +11,7 @@ public interface PriceReductionMapper {
     //Assembler
     @Mapping(target = "startDate", source = "priceReductionDTO.startDate", dateFormat = "dd-MM-yyyy")
     @Mapping(target = "endDate", source = "priceReductionDTO.endDate", dateFormat ="dd-MM-yyyy")
-    PriceReductionMapper dtoToModel(PriceReductionDTO priceReductionDTO);
+    PriceReduction dtoToModel(PriceReductionDTO priceReductionDTO);
 
     @Mapping(target = "startDate", source = "priceReduction.startDate", dateFormat = "dd-MM-yyyy")
     @Mapping(target = "endDate", source = "priceReduction.endDate", dateFormat ="dd-MM-yyyy")

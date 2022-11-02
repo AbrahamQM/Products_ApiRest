@@ -7,7 +7,6 @@ import com.bb2.Products_ApiRest.Repositories.ProductRepository;
 import com.bb2.Products_ApiRest.Services.Interfaces.ProductService;
 import com.bb2.Products_ApiRest.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> pojos = productRepository.findAll();
         List<ProductDTO> dtos = new ArrayList<ProductDTO>();
         for (Product product : pojos) {
-            dtos.add(productMapper.ModelToDTO(product));
+            dtos.add(productMapper.modelToDto(product));
         }
         return dtos;
     }
@@ -40,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO getById(Long id) {
-        return productMapper.ModelToDTO(productRepository.getById(id));
+        return productMapper.modelToDto(productRepository.getById(id));
     }
 
     @Override

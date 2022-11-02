@@ -2,10 +2,12 @@ package com.bb2.Products_ApiRest.Mappers.Impl;
 
 import com.bb2.Products_ApiRest.DTOs.ProductDTO;
 import com.bb2.Products_ApiRest.DTOs.SupplierDTO;
+import com.bb2.Products_ApiRest.Mappers.PriceReductionMapper;
 import com.bb2.Products_ApiRest.Mappers.ProductMapper;
 import com.bb2.Products_ApiRest.Mappers.SupplierMapper;
+import com.bb2.Products_ApiRest.Mappers.UserMapper;
 import com.bb2.Products_ApiRest.models.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.text.ParseException;
 import java.util.List;
@@ -17,8 +19,7 @@ public class ProductMapperImpl implements ProductMapper {
             return null;
         }
 
-        @Autowired
-        SupplierMapper supplierMapper;
+        SupplierMapper supplierMapper = new SupplierMapperImpl();
 
         Product product = new Product();
         product.setIdProduct(productDTO.getIdProduct());
@@ -35,12 +36,31 @@ public class ProductMapperImpl implements ProductMapper {
         product.setCreationDate(productDTO.getCreationDate());
 
 
-        return null;
+        return product;
     }
 
     @Override
-    public ProductDTO ModelToDTO(Product product) {
-        return null;
+    public ProductDTO modelToDto(Product product) {
+        if(product == null){
+            return null;
+        }
+        SupplierMapper supplierMapper = new SupplierMapperImpl();
+        PriceReductionMapper priceReductionMapper = new PriceReductionMapperImpl();
+        UserMapper userMapper = new UserMapperImpl();
+        ProductDTO productDTO = new ProductDTO();
+
+        productDTO.setIdProduct(product.getIdProduct());
+        productDTO.setItemCode(product.getItemCode());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setPrice(product.getPrice());
+        productDTO.setState(product.getState());
+        productDTO.setReasonDeactivation(product.getReasonDeactivation());
+        productDTO.setSuppliers(supplierMapper.getListDtos(product.getSuppliers()));
+        productDTO.setPriceReductions(priceReductionMapper.getListDTO(product.getPriceReductions()));
+        productDTO.setCreationDate(product.getCreationDate());
+        productDTO.setCreator(userMapper.modelToDto(product.getCreator()));
+
+        return productDTO;
     }
 
     @Override

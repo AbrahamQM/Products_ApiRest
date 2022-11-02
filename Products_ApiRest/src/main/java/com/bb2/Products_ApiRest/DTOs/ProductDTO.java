@@ -13,7 +13,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 //@Getter
@@ -28,8 +30,8 @@ public class ProductDTO {
     private Double price;
     private StateEnum state;//  State : This can either be ‘Active’ or ‘Discontinued’.
     private String reasonDeactivation;
-    private Set<SupplierDTO> suppliers = new HashSet();
-    private Set<PriceReductionDTO> priceReductions = new HashSet();
+    private List<SupplierDTO> suppliers = new ArrayList<>();
+    private List<PriceReductionDTO> priceReductions = new ArrayList<>();
     private LocalDateTime creationDate;
     private UserDTO creator;
 
@@ -43,8 +45,8 @@ public class ProductDTO {
                       Double price,
                       StateEnum state,
                       String reasonDeactivation,
-                      Set<SupplierDTO> suppliers,
-                      Set<PriceReductionDTO> priceReductions,
+                      List<SupplierDTO> suppliers,
+                      List<PriceReductionDTO> priceReductions,
                       LocalDateTime creationDate,
                       UserDTO creator) {
         this.idProduct = idProduct;
@@ -60,6 +62,7 @@ public class ProductDTO {
     }
 
     //getter & Setter
+
 
     public Long getIdProduct() {
         return idProduct;
@@ -109,19 +112,19 @@ public class ProductDTO {
         this.reasonDeactivation = reasonDeactivation;
     }
 
-    public Set<SupplierDTO> getSuppliers() {
+    public List<SupplierDTO> getSuppliers() {
         return suppliers;
     }
 
-    public void setSuppliers(Set<SupplierDTO> suppliers) {
+    public void setSuppliers(List<SupplierDTO> suppliers) {
         this.suppliers = suppliers;
     }
 
-    public Set<PriceReductionDTO> getPriceReductions() {
+    public List<PriceReductionDTO> getPriceReductions() {
         return priceReductions;
     }
 
-    public void setPriceReductions(Set<PriceReductionDTO> priceReductions) {
+    public void setPriceReductions(List<PriceReductionDTO> priceReductions) {
         this.priceReductions = priceReductions;
     }
 
