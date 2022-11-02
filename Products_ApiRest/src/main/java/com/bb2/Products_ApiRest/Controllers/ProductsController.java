@@ -19,39 +19,69 @@ public class ProductsController {
 
     @GetMapping("/allProducts")
     public List<ProductDTO> getAllProducts(){
-        return productService.getAllProducts();
+        List<ProductDTO> productsDtoList = productService.getAllProducts();
+        for (ProductDTO productDto : productsDtoList){ // contraseñas a null para no mostrarlas
+            UserDTO creator = productDto.getCreator();
+            creator.setPassword(null);
+            productDto.setCreator(creator);
+        }
+        return productsDtoList;
     }
 
-    @GetMapping("/productDetails")
-    public ResponseEntity<ProductDTO> getProductDetails(@RequestBody ProductDTO productDTO){
-        return ResponseEntity.ok(productService.getById(productDTO.getIdProduct()));
-    }
-
-
-    @PostMapping("/create")
-    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDTO ) {
-        if (productDTO.getItemCode() == null || productDTO.getDescription() == null) {
+    @GetMapping("/productDetails/{id}")
+    public ResponseEntity<ProductDTO> getProductDetails(@PathVariable Long id){
+        ProductDTO productDTO =productService.getById(id);
+        if(id == null){
             return ResponseEntity.badRequest().build();
         }
-        productService.save(productDTO);
+        UserDTO creator = productDTO.getCreator();
+        creator.setPassword(null);
+        productDTO.setCreator(creator);
+        return  ResponseEntity.ok(productDTO);
+    }
+
+//Todo mejorar para no tener que pasarle el creador(json) completo sino sólo el id del creador o que lo obtenga del login.
+    @PostMapping("/create")
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDto ) {
+        if (productDto.getItemCode() == null || productDto.getDescription() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        productService.save(productDto);
+        UserDTO creator = productDto.getCreator();
+        creator.setPassword(null);
+        productDto.setCreator(creator);
+        return ResponseEntity.ok(productDto);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        if (productService.getById(id) == null){
+            return ResponseEntity.notFound().build(); //si no existe el producto, devuelvo 404
+        }
+        ProductDTO oldProductDTO = productService.getById(id);
+        productDTO.setIdProduct(id);
+        productDTO.setCreator(oldProductDTO.getCreator());
+        productService.save(productDTO); //Actualizo el producto
+        //Oculto la password y devuelvo el producto:
+        UserDTO creator = productDTO.getCreator();
+        creator.setPassword(null);
+        productDTO.setCreator(creator);
         return ResponseEntity.ok(productDTO);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO) {
-        if (productService.getById(productDTO.getIdProduct()) == null){
-            return ResponseEntity.notFound().build(); //si no existe el producto, devuelvo 404
+    @PutMapping("/deactivate/{id}")
+    public ResponseEntity<ProductDTO> deactivate(@PathVariable Long id, @RequestBody String reasonDeactivation) {
+        if (id == null || productService.getById(id) == null || reasonDeactivation == null){
+            //si no pasan una id o, no existe el producto o, no incluyen la razón de desactivación , devuelvo 400
+            return ResponseEntity.badRequest().build();
         }
-        productService.save(productDTO);
-        return ResponseEntity.ok(productDTO);
-    }
-
-    @PutMapping("/deactivate")
-    public ResponseEntity<ProductDTO> deactivate(@RequestBody ProductDTO productDTO) {
-        if (productService.getById(productDTO.getIdProduct()) == null){
-            return ResponseEntity.notFound().build(); //si no existe el producto, devuelvo 404
-        }
+        ProductDTO productDTO = productService.getById(id);
+        productDTO.setReasonDeactivation(reasonDeactivation);
         productService.deactivate(productDTO);
+        //Oculto la password y devuelvo el producto:
+        UserDTO creator = productDTO.getCreator();
+        creator.setPassword(null);
+        productDTO.setCreator(creator);
         return ResponseEntity.ok(productDTO);
     }
 }

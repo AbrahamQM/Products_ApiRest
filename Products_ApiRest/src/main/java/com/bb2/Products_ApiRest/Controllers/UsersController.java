@@ -1,5 +1,6 @@
 package com.bb2.Products_ApiRest.Controllers;
 
+import com.bb2.Products_ApiRest.DTOs.ProductDTO;
 import com.bb2.Products_ApiRest.DTOs.UserDTO;
 import com.bb2.Products_ApiRest.Repositories.UserRepository;
 import com.bb2.Products_ApiRest.Services.Implementations.UserServiceImpl;
@@ -26,7 +27,12 @@ public class UsersController {
     //Get All
     @GetMapping("/allUsers")
     public List<UserDTO> getAllUsers() {
-        return userServiceImpl.getAllUsers();
+        List<UserDTO> usersDto = userServiceImpl.getAllUsers();
+        for ( UserDTO userDTO : usersDto ){ //Oculto las contraseñas
+            userDTO.setPassword(null);
+        }
+
+        return usersDto;
     }
 
     //Create User
@@ -43,7 +49,9 @@ public class UsersController {
             }
         }
         //Everything parece ok, creo el usuario y lo devuelvo en la response
-        return ResponseEntity.ok(userServiceImpl.createUser(userDTO));
+        userDTO = userServiceImpl.createUser(userDTO);
+        userDTO.setPassword(null); //oculto la contraseña antes de devolverlo
+        return ResponseEntity.ok(userDTO);
     }
 
     //Get one by id
@@ -51,14 +59,17 @@ public class UsersController {
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id){
         UserDTO dto = userServiceImpl.getById(id);
         if (dto != null){
+            dto.setPassword(null); //oculto la contraseña antes de devolver el objeto creado.
             return ResponseEntity.ok(dto);
         }
         return ResponseEntity.notFound().build();
     }
 
+    //Todo, hay que mejorar el mapeo para que no de error al borrar un usuario que aparece como creador de producto.
     @DeleteMapping("/user/{id}")
     public ResponseEntity<UserDTO> deleteUserById(@PathVariable Long id){
         UserDTO dto = userServiceImpl.deleteById(id);
+        dto.setPassword(null); //oculto la contraseña antes de devolver el objeto eliminado.
         return ResponseEntity.ok(dto);
     }
 }
