@@ -54,7 +54,7 @@ public class SuppliersController {
         return ResponseEntity.ok(dto);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}") //Todo, bug al intentar eliminar elemento que ya no existe
     public ResponseEntity<SupplierDTO> delete(@PathVariable Long id) {
         if (id == null) {
             System.out.println("Trying to delete by id without id parameter");
