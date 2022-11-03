@@ -11,7 +11,7 @@ public interface SupplierMapper {
 
     //Assemblers
     Supplier dtoToModel(SupplierDTO supplierDTO);
-    SupplierDTO ModelToDTO(Supplier supplier);
+    SupplierDTO modelToDTO(Supplier supplier);
 
     //Listados
     List<Supplier> getListModels(List<SupplierDTO> supplierDtoList);

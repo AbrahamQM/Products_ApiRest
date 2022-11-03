@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductService {
     List<ProductDTO> getAllProducts();
-    void save(ProductDTO user);
+    void save(ProductDTO productDTO);
     ProductDTO getById(Long id);
     void deactivate(ProductDTO productDTO);
 }

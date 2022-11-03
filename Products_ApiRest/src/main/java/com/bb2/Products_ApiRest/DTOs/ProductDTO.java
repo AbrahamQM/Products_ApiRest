@@ -120,6 +120,10 @@ public class ProductDTO {
         this.suppliers = suppliers;
     }
 
+
+    public void addSupplier(SupplierDTO supplierDto){ //Método para añadir un supplier a la lista
+        this.suppliers.add(supplierDto);
+    }
     public List<PriceReductionDTO> getPriceReductions() {
         return priceReductions;
     }

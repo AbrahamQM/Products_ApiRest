@@ -1,16 +1,7 @@
 package com.bb2.Products_ApiRest.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
 import javax.persistence.*;
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
+
 @Entity
 @Table(name = "suppliers")
 public class Supplier {

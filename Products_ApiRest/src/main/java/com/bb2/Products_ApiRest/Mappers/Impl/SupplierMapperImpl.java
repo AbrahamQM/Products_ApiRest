@@ -6,7 +6,7 @@ import com.bb2.Products_ApiRest.models.Supplier;
 
 import java.util.ArrayList;
 import java.util.List;
-//Todo todo, por ahora está implementado con intellij, falta implementar correctamente.
+
 
 public class SupplierMapperImpl implements SupplierMapper {
     @Override
@@ -22,7 +22,7 @@ public class SupplierMapperImpl implements SupplierMapper {
     }
 
     @Override
-    public SupplierDTO ModelToDTO(Supplier supplier) {
+    public SupplierDTO modelToDTO(Supplier supplier) {
         if (supplier == null) {
             return null;
         }
@@ -52,7 +52,7 @@ public class SupplierMapperImpl implements SupplierMapper {
         }
         List<SupplierDTO> suppliersDto = new ArrayList();
         for (Supplier supplier : supplierList) {
-            suppliersDto.add(ModelToDTO(supplier));
+            suppliersDto.add(modelToDTO(supplier));
         }
         return suppliersDto;
     }

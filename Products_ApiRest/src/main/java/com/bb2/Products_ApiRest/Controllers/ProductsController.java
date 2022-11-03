@@ -1,8 +1,13 @@
 package com.bb2.Products_ApiRest.Controllers;
 
 import com.bb2.Products_ApiRest.DTOs.ProductDTO;
+import com.bb2.Products_ApiRest.DTOs.SupplierDTO;
 import com.bb2.Products_ApiRest.DTOs.UserDTO;
+import com.bb2.Products_ApiRest.Mappers.SupplierMapper;
+import com.bb2.Products_ApiRest.Repositories.SupplierRepository;
+import com.bb2.Products_ApiRest.Services.Implementations.UserServiceImpl;
 import com.bb2.Products_ApiRest.Services.Interfaces.ProductService;
+import com.bb2.Products_ApiRest.Services.Interfaces.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +20,12 @@ public class ProductsController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private UserServiceImpl userServiceImpl;
+
+    @Autowired
+    private SupplierService supplierService;
 
 
     @GetMapping("/allProducts")
@@ -40,12 +51,14 @@ public class ProductsController {
         return  ResponseEntity.ok(productDTO);
     }
 
-//Todo mejorar para no tener que pasarle el creador(json) completo sino sólo el id del creador o que lo obtenga del login.
-    @PostMapping("/create")
-    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDto ) {
+
+    @PostMapping("/create/{creator_id}/{supplier_id}")
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDto, @PathVariable Long creator_id , @PathVariable Long supplier_id) {
         if (productDto.getItemCode() == null || productDto.getDescription() == null) {
             return ResponseEntity.badRequest().build();
         }
+        productDto.setCreator( userServiceImpl.getById(creator_id));
+        productDto.addSupplier(supplierService.getById(supplier_id));
         productService.save(productDto);
         UserDTO creator = productDto.getCreator();
         creator.setPassword(null);
