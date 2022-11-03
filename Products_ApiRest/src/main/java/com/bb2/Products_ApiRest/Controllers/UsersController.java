@@ -65,8 +65,8 @@ public class UsersController {
         return ResponseEntity.notFound().build();
     }
 
-    //Todo, hay que mejorar el mapeo para que no de error al borrar un usuario que aparece como creador de producto.
-    @DeleteMapping("/user/{id}")
+
+    @DeleteMapping("/deleteUser/{id}")
     public ResponseEntity<UserDTO> deleteUserById(@PathVariable Long id){
         UserDTO dto = userServiceImpl.deleteById(id);
         dto.setPassword(null); //oculto la contraseña antes de devolver el objeto eliminado.

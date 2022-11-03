@@ -2,6 +2,8 @@
 --Creo un usuario de cada tipo para la tabla
 insert into users (user_id , password, role, user_name ) values ( nextval('erp.USER_ID_SEQ') , '0000', 'USER', 'Usuario1');
 insert into users (user_id , password, role, user_name ) values ( nextval('erp.USER_ID_SEQ') , '0000', 'ADMIN', 'Admin1');
+--Usuario ficticio para cuando eliminamos un usuario que es creador de algún/os prodcto/s
+insert into users (user_id , password, role, user_name ) values (0 , '0000', 'USER', 'Usuario ficticio');
 
 --Creo un supplier para pruebas
 insert into suppliers (supplier_id, country, name) values (nextval('erp.SUPPLIER_ID_SEQ') , 'Spain', 'empresa s.l.');

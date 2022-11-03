@@ -1,26 +1,11 @@
 package com.bb2.Products_ApiRest.models;
-
 import com.bb2.Products_ApiRest.Enums.StateEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@EnableJpaAuditing
-//@ApiModel("Products: Entidad para representar un elemento producto con sus atributos") -->Para swagger
 @Entity
 @Table(name = "Products", uniqueConstraints = @UniqueConstraint(columnNames = "item_code"))
 public class Product {
@@ -30,7 +15,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_seq")
     @SequenceGenerator(name = "product_id_seq", sequenceName = "product_id_seq", allocationSize = 1, schema = "erp")
     @Column(name = "idproduct")
-//    @ApiModelProperty("Clave ficticia autoincremental tipo Long")  -->Para swagger
     private Long idProduct;
 
     @Column(name = "item_code", nullable = false)
@@ -61,8 +45,8 @@ public class Product {
     private LocalDateTime creationDate;
 
 //  Creator (User) -->Enlaza con Tabla Usuarios y obtiene el usuario que lo ha creado.
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "creator", referencedColumnName = "user_id")
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "creator", referencedColumnName = "user_id", nullable = false)
     private User creator;
 
     //Constructores
