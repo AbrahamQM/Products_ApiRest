@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserServices {
     public UserDTO deleteById(Long id) {
         Optional<User> userOpt = userRepository.findById(id);
         if (userOpt.isPresent()) {
-            //cambio el creator en todos los productos que tengan este usuario creador.-> a usuario ficticio
+            //cambio el creator en todos los productos que tengan este usuario creador a usuario ficticio
             List<ProductDTO> products = productService.getAllProducts();
             for(ProductDTO product : products){
                 if(product.getCreator().getIdUser().equals(id)){

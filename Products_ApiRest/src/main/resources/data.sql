@@ -7,6 +7,8 @@ insert into users (user_id , password, role, user_name ) values (0 , '0000', 'US
 
 --Creo un supplier para pruebas
 insert into suppliers (supplier_id, country, name) values (nextval('erp.SUPPLIER_ID_SEQ') , 'Spain', 'empresa s.l.');
+--Supplier ficticio para cuando eliminamos un supplier que está en la lista de algún producto
+insert into suppliers (supplier_id, country, name) values (0 , 'Sin País', 'Empresa Fantasma');
 
 ----Creo un producto para pruebas
 insert into products (IDPRODUCT, CREATION_DATE, DESCRIPTION, ITEM_CODE, PRICE, REASON_DEACTIVATION, STATE, CREATOR)

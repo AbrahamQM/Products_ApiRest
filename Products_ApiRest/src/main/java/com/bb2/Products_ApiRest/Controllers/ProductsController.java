@@ -1,10 +1,7 @@
 package com.bb2.Products_ApiRest.Controllers;
 
 import com.bb2.Products_ApiRest.DTOs.ProductDTO;
-import com.bb2.Products_ApiRest.DTOs.SupplierDTO;
 import com.bb2.Products_ApiRest.DTOs.UserDTO;
-import com.bb2.Products_ApiRest.Mappers.SupplierMapper;
-import com.bb2.Products_ApiRest.Repositories.SupplierRepository;
 import com.bb2.Products_ApiRest.Services.Implementations.UserServiceImpl;
 import com.bb2.Products_ApiRest.Services.Interfaces.ProductService;
 import com.bb2.Products_ApiRest.Services.Interfaces.SupplierService;
