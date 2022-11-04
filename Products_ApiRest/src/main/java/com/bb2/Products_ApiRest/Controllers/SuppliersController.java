@@ -54,21 +54,27 @@ public class SuppliersController {
         return ResponseEntity.ok(dto);
     }
 
-    @DeleteMapping("/delete/{id}") //Todo, bug al intentar eliminar elemento que ya no existe
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<SupplierDTO> delete(@PathVariable Long id) {
-        if (id == null) {
-            System.out.println("Trying to delete by id without id parameter");
+        if (id.equals(null) || id == 0L) { //compruebo que pasen un id y protejo el supplier ficticio.
+            System.out.println("Trying to delete by id without Id parameter or Id = 0");
             return ResponseEntity.badRequest().build();
         }
-        SupplierDTO dto = supplierService.getById(id);
-        if (dto == null) {
-            System.out.println("Trying to delete an non-existent Supplier ");
-        }
-        //sustituyo el supplier en todos los productos que contengan este supplier en su lista a supplier ficticio
-        supplierService.cleanProducts(dto);
+        try {
+            SupplierDTO dto = supplierService.getById(id);
+            if (dto == null) {
+                System.out.println("Trying to delete a non-existent supplier");
+                return ResponseEntity.notFound().build();
+            }
+            //sustituyo el supplier en todos los productos que contengan este supplier en su lista a supplier ficticio
+            supplierService.cleanProducts(dto);
 
-        supplierService.deleteById(id);
-        return ResponseEntity.ok(dto);
+            supplierService.deleteById(id);
+            return ResponseEntity.ok(dto);
+        } catch (Exception e){
+            System.out.println("|-----> ERROR: "+ e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

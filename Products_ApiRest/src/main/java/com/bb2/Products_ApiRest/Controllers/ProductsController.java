@@ -1,6 +1,7 @@
 package com.bb2.Products_ApiRest.Controllers;
 
 import com.bb2.Products_ApiRest.DTOs.ProductDTO;
+import com.bb2.Products_ApiRest.DTOs.SupplierDTO;
 import com.bb2.Products_ApiRest.DTOs.UserDTO;
 import com.bb2.Products_ApiRest.Services.Implementations.UserServiceImpl;
 import com.bb2.Products_ApiRest.Services.Interfaces.ProductService;
@@ -50,17 +51,29 @@ public class ProductsController {
 
 
     @PostMapping("/create/{creator_id}/{supplier_id}")
-    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDto, @PathVariable Long creator_id , @PathVariable Long supplier_id) {
-        if (productDto.getItemCode() == null || productDto.getDescription() == null) {
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDto,
+                                             @PathVariable Long creator_id ,
+                                             @PathVariable Long supplier_id) {
+        if (productDto.getItemCode() == null || productDto.getDescription() == null ||
+                creator_id.equals(null) || supplier_id.equals(null)) {
             return ResponseEntity.badRequest().build();
         }
-        productDto.setCreator( userServiceImpl.getById(creator_id));
-        productDto.addSupplier(supplierService.getById(supplier_id));
-        productService.save(productDto);
-        UserDTO creator = productDto.getCreator();
-        creator.setPassword(null);
-        productDto.setCreator(creator);
-        return ResponseEntity.ok(productDto);
+        try {
+            UserDTO creator = userServiceImpl.getById(creator_id);
+            SupplierDTO supplier = supplierService.getById(supplier_id);
+
+            productDto.setCreator(creator);
+            productDto.addSupplier(supplier);
+            productService.save(productDto);
+            //Oculto la password y devuelvo el producto:
+            creator.setPassword(null);
+            productDto.setCreator(creator);
+            return ResponseEntity.ok(productDto);
+
+        } catch (Exception e) {
+            System.out.println("Trying to create a product with not-existing creator and/or supplier.");
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/update/{id}")
@@ -93,5 +106,25 @@ public class ProductsController {
         creator.setPassword(null);
         productDTO.setCreator(creator);
         return ResponseEntity.ok(productDTO);
+    }
+
+
+    @PutMapping("/addSupplier/{product_id}/{supplier_id}")
+    public ResponseEntity<ProductDTO> addSupplier(@PathVariable Long product_id, @PathVariable Long supplier_id){
+        if (product_id.equals(null) || supplier_id.equals(null)){
+            return ResponseEntity.badRequest().build();
+        }
+        ProductDTO productDto = productService.getById(product_id);
+        SupplierDTO supplierDto = supplierService.getById(supplier_id);
+        if (productDto == null || supplierDto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        productDto.addSupplier(supplierDto);
+        productService.save(productDto);
+        //Oculto la password y devuelvo el producto:
+        UserDTO creator = productDto.getCreator();
+        creator.setPassword(null);
+        productDto.setCreator(creator);
+        return ResponseEntity.ok(productDto);
     }
 }

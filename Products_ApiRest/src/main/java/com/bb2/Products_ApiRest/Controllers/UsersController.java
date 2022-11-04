@@ -68,8 +68,13 @@ public class UsersController {
 
     @DeleteMapping("/deleteUser/{id}")
     public ResponseEntity<UserDTO> deleteUserById(@PathVariable Long id){
+        if (id.equals(null) || id == 0L){//compruebo que pasen una id y protejo el usuario ficticio
+            return ResponseEntity.badRequest().build();
+        }
         UserDTO dto = userServiceImpl.deleteById(id);
         dto.setPassword(null); //oculto la contraseña antes de devolver el objeto eliminado.
         return ResponseEntity.ok(dto);
     }
+
+
 }
