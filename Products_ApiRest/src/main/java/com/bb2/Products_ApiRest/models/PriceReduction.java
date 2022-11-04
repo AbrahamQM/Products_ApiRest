@@ -13,15 +13,17 @@ public class PriceReduction {
     @Column(name = "priceReduction_id")
     private Long idPriceReduction;
 
-    private Long reducedPrice;
+    private String description;
+    private Double reducedPrice;
     private LocalDate startDate;
     private LocalDate endDate;
 
     public PriceReduction() {
     }
 
-    public PriceReduction(Long idPriceReduction, Long reducedPrice, LocalDate startDate, LocalDate endDate) {
+    public PriceReduction(Long idPriceReduction, String description, Double reducedPrice, LocalDate startDate, LocalDate endDate) {
         this.idPriceReduction = idPriceReduction;
+        this.description = description;
         this.reducedPrice = reducedPrice;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -35,11 +37,19 @@ public class PriceReduction {
         this.idPriceReduction = idPriceReduction;
     }
 
-    public Long getReducedPrice() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getReducedPrice() {
         return reducedPrice;
     }
 
-    public void setReducedPrice(Long reducedPrice) {
+    public void setReducedPrice(Double reducedPrice) {
         this.reducedPrice = reducedPrice;
     }
 

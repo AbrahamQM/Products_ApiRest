@@ -22,7 +22,7 @@
 //        http.authorizeRequests()
 //                .antMatchers("/hello/").permitAll() //Para probar con endpoint hello/
 //                .antMatchers("/users/**").permitAll() //Para poder registrar un usuario
-//                .antMatchers("/h2-ui/**").permitAll() //Para poder registrar un producto
+//                .antMatchers("/h2-console/**").permitAll() //Para poder registrar un producto
 //                .antMatchers("/hello/authUserPrueba").hasRole(String.valueOf(RoleEnum.USER))
 //                .antMatchers("/hello/authAdminPrueba").hasRole(String.valueOf(RoleEnum.ADMIN))
 //                .anyRequest().permitAll() //.authenticated()

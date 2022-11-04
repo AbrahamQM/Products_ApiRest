@@ -1,9 +1,11 @@
 package com.bb2.Products_ApiRest.Controllers;
 
+import com.bb2.Products_ApiRest.DTOs.PriceReductionDTO;
 import com.bb2.Products_ApiRest.DTOs.ProductDTO;
 import com.bb2.Products_ApiRest.DTOs.SupplierDTO;
 import com.bb2.Products_ApiRest.DTOs.UserDTO;
 import com.bb2.Products_ApiRest.Services.Implementations.UserServiceImpl;
+import com.bb2.Products_ApiRest.Services.Interfaces.PriceReductionService;
 import com.bb2.Products_ApiRest.Services.Interfaces.ProductService;
 import com.bb2.Products_ApiRest.Services.Interfaces.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class ProductsController {
 
     @Autowired
     private SupplierService supplierService;
+
+    @Autowired
+    private PriceReductionService priceReductionService;
 
 
     @GetMapping("/allProducts")
@@ -120,6 +125,27 @@ public class ProductsController {
             return ResponseEntity.notFound().build();
         }
         productDto.addSupplier(supplierDto);
+        productService.save(productDto);
+        //Oculto la password y devuelvo el producto:
+        UserDTO creator = productDto.getCreator();
+        creator.setPassword(null);
+        productDto.setCreator(creator);
+        return ResponseEntity.ok(productDto);
+    }
+
+
+    @PutMapping("/addPriceReduction/{product_id}/{priceReduction_id}")
+    public ResponseEntity<ProductDTO> addPriceReduction(@PathVariable Long product_id,
+                                                        @PathVariable Long priceReduction_id){
+        if (product_id.equals(null) || priceReduction_id.equals(null)){
+            return ResponseEntity.badRequest().build();
+        }
+        ProductDTO productDto = productService.getById(product_id);
+        PriceReductionDTO priceReductionDto = priceReductionService.getById(priceReduction_id);
+        if (productDto == null || priceReductionDto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        productDto.addPriceReduction(priceReductionDto);
         productService.save(productDto);
         //Oculto la password y devuelvo el producto:
         UserDTO creator = productDto.getCreator();

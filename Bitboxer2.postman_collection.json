@@ -202,6 +202,177 @@
 					]
 				},
 				{
+					"name": "Suppliers",
+					"item": [
+						{
+							"name": "Obtener todos los Proveedores",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/suppliers/allSuppliers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"suppliers",
+										"allSuppliers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener proveedor por id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/suppliers/supplierById/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"suppliers",
+										"supplierById",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear Proveedor",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"-¡¡empresa AÑADIDA!! s.l.\",\r\n    \"country\": \"Dominican Republik\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/suppliers/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"suppliers",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Borrar Proveedor delete/supplier_id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/suppliers/delete/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"suppliers",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Price Reductions",
+					"item": [
+						{
+							"name": "Obtener todos los descuentos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/priceReductions/allPriceReductions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"priceReductions",
+										"allPriceReductions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener descuento por id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/priceReductions/priceReductionById/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"priceReductions",
+										"priceReductionById",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear descuento",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"descuento AÑADIDO DESDE POSTMAN\",\r\n    \"reducedPrice\": 99.99,\r\n    \"startDate\": \"2022-11-04\",\r\n    \"endDate\": \"2030-01-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/priceReductions/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"priceReductions",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Products",
 					"item": [
 						{
@@ -246,13 +417,13 @@
 							"response": []
 						},
 						{
-							"name": "Añadir Producto */creator_id/supplier_id  --- Json->itemCode (UNIQUE)",
+							"name": "Añadir Producto */creator_id/supplier_id  --- (Body)Json->itemCode (UNIQUE)",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"idProduct\": 0,\r\n    \"itemCode\": 6,\r\n    \"description\": \"producto añadido desde postman\",\r\n    \"price\": 22.95,\r\n    \"state\": \"ACTIVE\",\r\n    \"reasonDeactivation\": null,\r\n    \"priceReductions\": [],\r\n    \"creationDate\": \"2022-11-04T08:32:15.64095\"\r\n    \r\n}",
+									"raw": "{\r\n    \"idProduct\": 0,\r\n    \"itemCode\": 3,\r\n    \"description\": \"producto añadido desde postman\",\r\n    \"price\": 22.95,\r\n    \"state\": \"ACTIVE\",\r\n    \"reasonDeactivation\": null,\r\n    \"priceReductions\": [],\r\n    \"creationDate\": \"2022-11-04T08:32:15.64095\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -260,7 +431,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/products/create/1/1 ",
+									"raw": "http://localhost:8080/products/create/2/1 ",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -269,7 +440,7 @@
 									"path": [
 										"products",
 										"create",
-										"1",
+										"2",
 										"1 "
 									]
 								}
@@ -283,7 +454,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"idProduct\": 0,\r\n    \"itemCode\": 1,\r\n    \"description\": \"ACTUALIZADO producto de prueba ACTUALIZADO\",\r\n    \"price\": 99999.95,\r\n    \"state\": \"ACTIVE\",\r\n    \"reasonDeactivation\": null,\r\n    \"suppliers\": [\r\n        {\r\n            \"idSupplier\": 1,\r\n            \"name\": \"empresa s.l.\",\r\n            \"country\": \"Spain\"\r\n        }\r\n    ],\r\n    \"priceReductions\": [],\r\n    \"creationDate\": \"2022-11-02T14:49:18.344743\"\r\n}",
+									"raw": "{\r\n    \"idProduct\": 0,\r\n    \"itemCode\": 3,\r\n    \"description\": \"ACTUALIZADO producto de prueba ACTUALIZADO\",\r\n    \"price\": 99999.95,\r\n    \"state\": \"ACTIVE\",\r\n    \"reasonDeactivation\": null,\r\n    \"suppliers\": [\r\n        {\r\n            \"idSupplier\": 1,\r\n            \"name\": \"empresa s.l.\",\r\n            \"country\": \"Spain\"\r\n        }\r\n    ],\r\n    \"priceReductions\": [],\r\n    \"creationDate\": \"2022-11-02T14:49:18.344743\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -291,7 +462,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/products/update/1",
+									"raw": "http://localhost:8080/products/update/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -300,7 +471,7 @@
 									"path": [
 										"products",
 										"update",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -352,98 +523,24 @@
 								}
 							},
 							"response": []
-						}
-					]
-				},
-				{
-					"name": "Suppliers",
-					"item": [
-						{
-							"name": "Obtener todos los Proveedores",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/suppliers/allSuppliers",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"suppliers",
-										"allSuppliers"
-									]
-								}
-							},
-							"response": []
 						},
 						{
-							"name": "Obtener proveedor por id",
+							"name": "Añadir un descuento a un producto */idProducto/idDescuento",
 							"request": {
-								"method": "GET",
+								"method": "PUT",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/suppliers/supplierById/1",
+									"raw": "http://localhost:8080/products/addPriceReduction/2/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"suppliers",
-										"supplierById",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Crear Proveedor",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"¡¡empresa AÑADIDA!! s.l.\",\r\n    \"country\": \"Dominican Republik\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/suppliers/create",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"suppliers",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Borrar Proveedor delete/supplier_id",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/suppliers/delete/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"suppliers",
-										"delete",
-										"1"
+										"products",
+										"addPriceReduction",
+										"2",
+										"2"
 									]
 								}
 							},

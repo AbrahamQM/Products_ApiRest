@@ -16,6 +16,7 @@ public class PriceReductionMapperImpl implements PriceReductionMapper {
         PriceReduction priceReduction = new PriceReduction();
 
         priceReduction.setIdPriceReduction(priceReductionDTO.getIdPriceReduction());
+        priceReduction.setDescription(priceReductionDTO.getDescription());
         priceReduction.setReducedPrice(priceReductionDTO.getReducedPrice());
         priceReduction.setStartDate(priceReductionDTO.getStartDate());
         priceReduction.setEndDate(priceReductionDTO.getEndDate());
@@ -28,10 +29,11 @@ public class PriceReductionMapperImpl implements PriceReductionMapper {
             return null;
         }
         PriceReductionDTO priceReductionDTO = new PriceReductionDTO();
-        priceReductionDTO.setIdPriceReduction(priceReduction.getIdPriceReduction());
+        priceReductionDTO.setDescription(priceReduction.getDescription());
         priceReductionDTO.setReducedPrice(priceReduction.getReducedPrice());
         priceReductionDTO.setStartDate(priceReduction.getStartDate());
         priceReductionDTO.setEndDate(priceReduction.getEndDate());
+        priceReductionDTO.setIdPriceReduction(priceReduction.getIdPriceReduction());
         return priceReductionDTO;
     }
 
@@ -50,7 +52,7 @@ public class PriceReductionMapperImpl implements PriceReductionMapper {
 
     @Override
     public List<PriceReductionDTO> getListDTO(List<PriceReduction> priceReductionList) {
-        if (priceReductionList == null){
+        if (priceReductionList == null || priceReductionList.size() == 0){
             return null;
         }
         List<PriceReductionDTO> priceReductionDTOList = new ArrayList<PriceReductionDTO>();

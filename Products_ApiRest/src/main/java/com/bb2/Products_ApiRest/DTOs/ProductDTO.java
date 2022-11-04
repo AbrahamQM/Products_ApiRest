@@ -120,8 +120,8 @@ public class ProductDTO {
         this.suppliers = suppliers;
     }
 
-
-    public void addSupplier(SupplierDTO supplierDto){ //Método para añadir un supplier a la lista
+    //Método para añadir un supplier a la lista
+    public void addSupplier(SupplierDTO supplierDto){
         this.suppliers.add(supplierDto);
     }
 
@@ -132,6 +132,9 @@ public class ProductDTO {
     public void setPriceReductions(List<PriceReductionDTO> priceReductions) {
         this.priceReductions = priceReductions;
     }
+
+    //Método para añadir un priceReduction a la lista
+    public void addPriceReduction(PriceReductionDTO priceReductionDto){ this.priceReductions.add(priceReductionDto);}
 
     public LocalDateTime getCreationDate() {
         return creationDate;

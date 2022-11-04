@@ -13,6 +13,11 @@ insert into suppliers (supplier_id, country, name) values (0 , 'Sin País', 'Emp
 ----Creo un producto para pruebas
 insert into products (IDPRODUCT, CREATION_DATE, DESCRIPTION, ITEM_CODE, PRICE, REASON_DEACTIVATION, STATE, CREATOR)
 values (nextval('erp.PRODUCT_ID_SEQ'), now(), 'producto de prueba', '0001', 22.95, null, 0, 1);
---
 ----Creo relación suppliers-products
 insert into SUPPLIERS_PRODUCTS (ID_PRODUCT , ID_SUPPLIER) values (1, 1);
+
+----Creo un PriceReduction para pruebas
+insert into PRICE_REDUCTIONS (PRICE_REDUCTION_ID, DESCRIPTION, END_DATE, REDUCED_PRICE, START_DATE)
+values(nextval('erp.PRICEREDUCTIONS_ID_SEQ'), 'descuento de prueba', '2030-01-01', 15.25, now());
+----Creo relación products-priceReductions
+insert into PRICE_REDUCTIONS_PRODUCTS (ID_PRODUCT, ID_PRICE_REDUCTION ) values (1,1);

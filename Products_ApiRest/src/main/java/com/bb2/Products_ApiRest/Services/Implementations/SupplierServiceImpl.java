@@ -11,7 +11,6 @@ import com.bb2.Products_ApiRest.models.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,12 +29,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public List<SupplierDTO> getAllSuppliers() {
-        List<Supplier> pojos = supplierRepository.findAll();
-        List<SupplierDTO> dtos = new ArrayList<SupplierDTO>();
-        for (Supplier supplier : pojos) {
-            dtos.add(supplierMapper.modelToDTO(supplier));
-        }
-        return dtos;
+        return supplierMapper.getListDtos(supplierRepository.findAll());
     }
 
     @Override

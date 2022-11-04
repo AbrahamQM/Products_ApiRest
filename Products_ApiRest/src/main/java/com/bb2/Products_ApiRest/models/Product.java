@@ -37,7 +37,7 @@ public class Product {
 //  required but recommended (look at the section ‘Extra points’).
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "price_reductions_products", joinColumns = @JoinColumn(name = "id_product", nullable = false),
-        inverseJoinColumns = @JoinColumn(name = "id_price_reduction", nullable = false))
+        inverseJoinColumns = @JoinColumn(name = "id_priceReduction", nullable = false))
     private List<PriceReduction> priceReductions = new ArrayList<>();
 
 //  Creation date --->>SE DEBE GUARDAR UNA FECHA DE CREACIÓN AL CONSTRUIR LA ENTIDAD Product
