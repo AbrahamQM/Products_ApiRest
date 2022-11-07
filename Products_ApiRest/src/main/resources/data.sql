@@ -21,3 +21,7 @@ insert into PRICE_REDUCTIONS (PRICE_REDUCTION_ID, DESCRIPTION, END_DATE, REDUCED
 values(nextval('erp.PRICEREDUCTIONS_ID_SEQ'), 'descuento de prueba', '2030-01-01', 15.25, now());
 ----Creo relación products-priceReductions
 insert into PRICE_REDUCTIONS_PRODUCTS (ID_PRODUCT, ID_PRICE_REDUCTION ) values (1,1);
+
+--Price reduction ficticio para cuando eliminamos un supplier que está en la lista de algún producto
+insert into PRICE_REDUCTIONS (PRICE_REDUCTION_ID, DESCRIPTION, END_DATE, REDUCED_PRICE, START_DATE)
+values(0, 'descuento ficticio', '2030-01-01', 0.00, now());

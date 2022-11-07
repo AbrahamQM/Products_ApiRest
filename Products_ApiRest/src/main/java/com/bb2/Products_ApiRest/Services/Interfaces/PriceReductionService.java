@@ -10,5 +10,5 @@ public interface PriceReductionService {
     PriceReductionDTO save(PriceReductionDTO priceReductionDTO);
     PriceReductionDTO getById(Long id);
     PriceReductionDTO deleteById(Long id);
-    void cleanProducts(SupplierDTO supplierDTO);
+    void cleanProducts(PriceReductionDTO priceReductionDTO);
 }
