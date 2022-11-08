@@ -369,6 +369,27 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Eliminar descuento por id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/priceReductions/delete/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"priceReductions",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -423,7 +444,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"idProduct\": 0,\r\n    \"itemCode\": 3,\r\n    \"description\": \"producto añadido desde postman\",\r\n    \"price\": 22.95,\r\n    \"state\": \"ACTIVE\",\r\n    \"reasonDeactivation\": null,\r\n    \"priceReductions\": [],\r\n    \"creationDate\": \"2022-11-04T08:32:15.64095\"\r\n}",
+									"raw": "{\r\n    \"idProduct\": 0,\r\n    \"itemCode\": 2,\r\n    \"description\": \"producto añadido desde postman\",\r\n    \"price\": 22.95,\r\n    \"state\": \"ACTIVE\",\r\n    \"reasonDeactivation\": null,\r\n    \"priceReductions\": [],\r\n    \"creationDate\": \"2022-11-04T08:32:15.64095\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -530,7 +551,7 @@
 								"method": "PUT",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/products/addPriceReduction/2/2",
+									"raw": "http://localhost:8080/products/addPriceReduction/1/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -539,10 +560,43 @@
 									"path": [
 										"products",
 										"addPriceReduction",
-										"2",
+										"1",
 										"2"
 									]
 								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth (Sin terminar)",
+					"item": [
+						{
+							"name": "Autenticación",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Registrer",
+							"request": {
+								"method": "GET",
+								"header": []
 							},
 							"response": []
 						}
